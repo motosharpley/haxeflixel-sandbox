@@ -5,11 +5,13 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.tweens.FlxTween;
 
 class PlayState extends FlxState
 {
 	var text:FlxText;
 	var sprite:FlxSprite;
+	var sprite2:FlxSprite;
 
 	override public function create():Void
 	{
@@ -25,6 +27,17 @@ class PlayState extends FlxState
 			}
 		}
 		add(sprite);
+		
+		sprite2 = new FlxSprite();
+		sprite2.loadGraphic(AssetPaths.devpathlogo__png);
+		sprite2.x = 0;
+		sprite2.y = 0;
+
+		add(sprite2);
+
+		FlxTween.tween(sprite2, {	x: FlxG.width - sprite2.width,
+															y: FlxG.height - sprite2.height,
+															angle: 360.0}, 3, {type:FlxTweenType.PINGPONG});
 
 		text = new FlxText(0, 0, FlxG.width, "Hello HaxeFlixel", 64);
 		text.setFormat(null,64,FlxColor.RED,FlxTextAlign.CENTER);
@@ -40,6 +53,6 @@ class PlayState extends FlxState
 
 		sprite.y++;
 		if(sprite.y > FlxG.height)
-		sprite.y = 0 - 64;
+		sprite.y = 0 - 300;
 	}
 }
